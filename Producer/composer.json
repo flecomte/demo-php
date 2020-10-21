@@ -16,7 +16,8 @@
     "ext-iconv": "*",
     "ext-zlib": "*",
     "symfony/console": "^5",
-    "symfony/dependency-injection": "^5"
+    "symfony/dependency-injection": "^5",
+    "php-amqplib/php-amqplib": "^2"
   },
   "require-dev": {
   },

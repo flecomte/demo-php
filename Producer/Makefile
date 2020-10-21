@@ -17,3 +17,7 @@ composer-install: ## Composer install
 
 run: ## Run
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev bin/console app:run
+
+build: ## Build docker image
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml build producer-dev
+

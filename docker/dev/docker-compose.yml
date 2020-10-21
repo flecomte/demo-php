@@ -9,6 +9,8 @@ services:
         NAME: ${NAME}_producer
     environment:
       DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_HOST: rabbitmq
       NAME: ${NAME}_producer
       APP_ENV: dev
     volumes:
@@ -37,6 +39,13 @@ services:
       interval: 3s
       timeout: 2s
       retries: 20
+
+  rabbitmq:
+    container_name: ${NAME}_rabbitmq
+    image: rabbitmq:management-alpine
+    ports:
+      - ${RABBITMQ_PORT}:5672
+      - ${RABBITMQ_MANAGEMENT_PORT}:15672
 
 volumes:
   db-data:

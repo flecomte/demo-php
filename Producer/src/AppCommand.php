@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Command;
+namespace App;
 
-use App\HistoryService;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
@@ -25,7 +24,7 @@ class AppCommand extends Command
         foreach ($this->historyController->pushHistory(new \DateTimeImmutable(), new \DateTimeImmutable()) as $i) {
             $progress->advance();
             $progress->display();
-        };
+        }
         $progress->finish();
         $progress->clear();
         $output->writeln('<info>Finish</info>');

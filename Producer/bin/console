@@ -3,17 +3,28 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use App\AppCommand;
 use App\ArchiveIteratorBuilder;
-use App\Command\AppCommand;
 use App\HistoryService;
+use App\Producer;
+use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 $application = new Application();
 
+$amq = new AMQPStreamConnection($_SERVER['RABBITMQ_HOST'], $_SERVER['RABBITMQ_PORT'], 'guest', 'guest');
+$channel = $amq->channel();
+$channel->queue_declare('history', false, true, false, false);
+$channel->exchange_declare('history', 'direct');
+$channel->queue_bind('history', 'history');
+
 $containerBuilder = new ContainerBuilder();
-$containerBuilder->autowire(ArchiveIteratorBuilder::class, ArchiveIteratorBuilder::class)->addArgument(__DIR__.'/../var/cache');
+$containerBuilder->autowire(ArchiveIteratorBuilder::class, ArchiveIteratorBuilder::class)
+    ->addArgument(__DIR__.'/../var/cache');
 $containerBuilder->autowire(HistoryService::class, HistoryService::class);
+$containerBuilder->autowire(Producer::class, Producer::class)
+    ->addArgument($channel);
 $containerBuilder->autowire(AppCommand::class, AppCommand::class)->setPublic(true);
 $containerBuilder->compile();
 

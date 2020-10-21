@@ -21,6 +21,7 @@ RUN docker-php-source extract \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) opcache \
     && docker-php-ext-install -j$(nproc) zip \
+    && docker-php-ext-install -j$(nproc) bcmath \
     && pecl install apcu \
     && docker-php-ext-enable apcu \
     && docker-php-source delete
