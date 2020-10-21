@@ -1,0 +1,42 @@
+version: '3.7'
+services:
+  producer-dev:
+    image: ${NAME}_producer-dev
+    container_name: ${NAME}_producer-dev
+    build:
+      context: producer
+      args:
+        NAME: ${NAME}_producer
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NAME: ${NAME}_producer
+      APP_ENV: dev
+    volumes:
+      - ../../Producer/:/www/${NAME}_producer:rw
+    links:
+      - "db"
+      - "db:database"
+      - "db:postgresql"
+
+  db:
+    image: ${NAME}_postgresql-dev
+    container_name: ${NAME}_postgresql-dev
+    build:
+      context: postgresql
+    ports:
+      - ${POSTGRES_PORT}:5432
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - ./var/log/postgresql:/var/log/postgresql:rw
+      - db-data:/var/lib/postgresql/data:rw
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-q", "-d", "${POSTGRES_DB}", "-U", "${POSTGRES_USER}" ]
+      interval: 3s
+      timeout: 2s
+      retries: 20
+
+volumes:
+  db-data:
