@@ -10,10 +10,10 @@ help: ## This help.
 .DEFAULT_GOAL := help
 
 composer-update: ## Composer update
-	cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev composer update
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev composer update
 
 composer-install: ## Composer install
-	cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev composer install
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev composer install
 
 run: ## Run
-	cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev bin/console app:run
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev bin/console app:run

@@ -3,11 +3,20 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use App\ArchiveIteratorBuilder;
 use App\Command\AppCommand;
+use App\HistoryService;
 use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 $application = new Application();
 
-$application->add(new AppCommand());
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->autowire(ArchiveIteratorBuilder::class, ArchiveIteratorBuilder::class)->addArgument(__DIR__.'/../var/cache');
+$containerBuilder->autowire(HistoryService::class, HistoryService::class);
+$containerBuilder->autowire(AppCommand::class, AppCommand::class)->setPublic(true);
+$containerBuilder->compile();
+
+$application->add($containerBuilder->get(AppCommand::class));
 
 $application->run();
