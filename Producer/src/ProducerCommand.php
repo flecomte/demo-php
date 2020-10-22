@@ -10,12 +10,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProducerCommand extends Command
 {
-    private HistoryService $historyController;
+    private HistoryService $historyService;
 
-    public function __construct(HistoryService $historyController)
+    public function __construct(HistoryService $historyService)
     {
         parent::__construct('app:run');
-        $this->historyController = $historyController;
+        $this->historyService = $historyService;
         $this->addArgument('date', InputArgument::REQUIRED);
     }
 
@@ -28,7 +28,7 @@ class ProducerCommand extends Command
             return Command::FAILURE;
         }
         try {
-            foreach ($this->historyController->pushHistory($date) as $i) {
+            foreach ($this->historyService->pushHistory($date) as $i) {
                 $progress->setProgress($i);
                 $progress->display();
             }
