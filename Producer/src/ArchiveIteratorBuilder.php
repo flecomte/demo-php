@@ -11,8 +11,8 @@ class ArchiveIteratorBuilder
         $this->cacheDir = $cacheDir;
     }
 
-    public function build(\DateTimeImmutable $begin, \DateTimeImmutable $end)
+    public function build(string $date)
     {
-        return new ArchiveIterator($begin, $end, $this->cacheDir);
+        return new ArchiveIterator($date, $this->cacheDir);
     }
 }

@@ -4,8 +4,6 @@ namespace App;
 
 class ArchiveIterator implements \Iterator
 {
-    private \DateTimeImmutable $begin;
-    private \DateTimeImmutable $end;
     /**
      * @var false|resource
      */
@@ -14,13 +12,9 @@ class ArchiveIterator implements \Iterator
     private int $i;
     private string $tmpFilename;
 
-    public function __construct(\DateTimeImmutable $begin, \DateTimeImmutable $end, string $cacheDir)
+    public function __construct(string $date, string $cacheDir)
     {
-        $this->begin = $begin;
-        $this->end = $end;
-
-        // TODO: change date
-        $fileName = '2015-01-01-12.json.gz';
+        $fileName = "$date.json.gz";
         $url = "http://data.gharchive.org/$fileName";
         $this->tmpFilename = "{$cacheDir}/zip/{$fileName}";
 

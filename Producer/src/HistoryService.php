@@ -13,10 +13,10 @@ class HistoryService
         $this->producer = $producer;
     }
 
-    public function pushHistory(\DateTimeImmutable $begin, \DateTimeImmutable $end): \Generator
+    public function pushHistory(string $date): \Generator
     {
         $i = 0;
-        foreach ($this->archiveIteratorBuilder->build($begin, $end) as $lineContent) {
+        foreach ($this->archiveIteratorBuilder->build($date) as $lineContent) {
             $this->producer->send($lineContent);
             yield ++$i;
         }
