@@ -1,5 +1,27 @@
 version: '3.7'
 services:
+  api-dev:
+    image: ${NAME}_api-dev
+    container_name: ${NAME}_api-dev
+    build:
+      context: api
+      args:
+        FRONT_HOST: ${FRONT_HOST}
+        NAME: ${NAME}_api
+    ports:
+      - ${NGINX_PORT}:80
+      - ${NGINX_SSL_PORT}:443
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NAME: ${NAME}_api
+      APP_ENV: dev
+    volumes:
+      - ../../Api:/www/${NAME}_api:rw
+    links:
+      - "db"
+      - "db:database"
+      - "db:postgresql"
+
   producer-dev:
     image: ${NAME}_producer-dev
     container_name: ${NAME}_producer-dev
@@ -12,6 +34,8 @@ services:
       RABBITMQ_HOST: rabbitmq
       NAME: ${NAME}_producer
       APP_ENV: dev
+    depends_on:
+      - rabbitmq
     volumes:
       - ../../Producer/:/www/${NAME}_producer:rw
 
@@ -28,6 +52,8 @@ services:
       RABBITMQ_HOST: rabbitmq
       NAME: ${NAME}_producer
       APP_ENV: dev
+    depends_on:
+      - rabbitmq
     volumes:
       - ../../Consumer/:/www/${NAME}_consumer:rw
     links:
