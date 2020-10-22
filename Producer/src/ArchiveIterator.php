@@ -12,6 +12,9 @@ class ArchiveIterator implements \Iterator
     private int $i;
     private string $tmpFilename;
 
+    /**
+     * @throws ArchiveIteratorException
+     */
     public function __construct(string $date, string $cacheDir)
     {
         $fileName = "$date.json.gz";
@@ -23,12 +26,12 @@ class ArchiveIterator implements \Iterator
         }
 
         if (copy($url, $this->tmpFilename) === false) {
-            throw new \Exception("Unable to Download file $url to $this->tmpFilename");
+            throw new ArchiveIteratorException("Unable to Download file $url to $this->tmpFilename");
         }
 
         $this->fileHandle = gzopen($this->tmpFilename, 'r');
         if ($this->fileHandle === false) {
-            throw new \Exception("Cannot open file $this->tmpFilename");
+            throw new ArchiveIteratorException("Cannot open file $this->tmpFilename");
         }
     }
 

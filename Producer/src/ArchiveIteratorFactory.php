@@ -11,7 +11,10 @@ class ArchiveIteratorFactory
         $this->cacheDir = $cacheDir;
     }
 
-    public function build(string $date)
+    /**
+     * @throws ArchiveIteratorException
+     */
+    public function build(string $date): ArchiveIterator
     {
         return new ArchiveIterator($date, $this->cacheDir);
     }

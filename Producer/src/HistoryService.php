@@ -13,6 +13,9 @@ class HistoryService
         $this->producer = $producer;
     }
 
+    /**
+     * @throws ArchiveIteratorException
+     */
     public function pushHistory(string $date): \Generator
     {
         $i = 0;

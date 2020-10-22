@@ -19,7 +19,7 @@ class AppCommand extends Command
         $this->addArgument('date', InputArgument::REQUIRED);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $progress = new ProgressBar($output);
         $date = $input->getArgument('date');
@@ -27,9 +27,14 @@ class AppCommand extends Command
             $output->writeln("<error>Wrong date format</error> <comment>($date)</comment>");
             return Command::FAILURE;
         }
-        foreach ($this->historyController->pushHistory($date) as $i) {
-            $progress->setProgress($i);
-            $progress->display();
+        try {
+            foreach ($this->historyController->pushHistory($date) as $i) {
+                $progress->setProgress($i);
+                $progress->display();
+            }
+        } catch (ArchiveIteratorException $e) {
+            $output->writeln("<error>{$e->getMessage()}</error>");
+            return Command::FAILURE;
         }
         $progress->finish();
         $progress->clear();
