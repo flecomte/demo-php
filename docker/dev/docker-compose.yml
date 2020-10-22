@@ -14,6 +14,22 @@ services:
       APP_ENV: dev
     volumes:
       - ../../Producer/:/www/${NAME}_producer:rw
+
+  consumer-dev:
+    image: ${NAME}_consumer-dev
+    container_name: ${NAME}_consumer-dev
+    build:
+      context: consumer
+      args:
+        NAME: ${NAME}_consumer
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      RABBITMQ_PORT: ${RABBITMQ_PORT}
+      RABBITMQ_HOST: rabbitmq
+      NAME: ${NAME}_producer
+      APP_ENV: dev
+    volumes:
+      - ../../Consumer/:/www/${NAME}_consumer:rw
     links:
       - "db"
       - "db:database"

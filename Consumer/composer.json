@@ -1,0 +1,61 @@
+{
+  "name": "flecomte/yst-consumer",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Fabrice Lecomte",
+      "email": "fabrice.lecomte.be@gmail.com"
+    }
+  ],
+  "type": "project",
+  "require": {
+    "php": ">=7.4",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "ext-json": "*",
+    "symfony/console": "^5",
+    "symfony/dependency-injection": "^5",
+    "php-amqplib/php-amqplib": "^2",
+    "fle/json-hydrator": "^2@dev",
+    "fle/json-hydrator-bundle": "^2@dev"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Consumer\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Consumer\\Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "paragonie/random_compat": "2.*",
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
+    "symfony/polyfill-php71": "*",
+    "symfony/polyfill-php70": "*",
+    "symfony/polyfill-php56": "*"
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "5.*"
+    }
+  }
+}
