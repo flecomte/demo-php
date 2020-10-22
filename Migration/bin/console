@@ -1,0 +1,51 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../vendor/autoload.php';
+
+use FLE\JsonHydrator\Database\Connection;
+use FLE\JsonHydrator\Migration\Command\GenerateFileCommand;
+use FLE\JsonHydrator\Migration\Command\GenerateFunctionCommand;
+use FLE\JsonHydrator\Migration\Command\MigrationMigrateCommand;
+use FLE\JsonHydrator\Migration\Command\MigrationStatusCommand;
+use FLE\JsonHydrator\Migration\Migration;
+use FLE\JsonHydrator\Migration\MigrationFunctions;
+use FLE\JsonHydrator\Serializer\EntityCollection;
+use FLE\JsonHydrator\Serializer\Serializer;
+use Symfony\Component\Console\Application;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+
+$application = new Application();
+
+$containerBuilder = new ContainerBuilder();
+
+$jmsSerializer = JMS\Serializer\SerializerBuilder::create()->build();
+$containerBuilder->autowire(Serializer::class, Serializer::class)
+    ->setArgument('$jmsSerializer', $jmsSerializer);
+
+$containerBuilder->autowire(EntityCollection::class, EntityCollection::class);
+$containerBuilder->autowire(Connection::class, Connection::class)
+    ->addArgument('yst')
+    ->addArgument('db')
+    ->addArgument('5432')
+    ->addArgument('yst')
+    ->addArgument('yst')
+    ->addArgument('yst')
+    ->setArgument('$stopwatch', null);
+$containerBuilder->autowire(Migration::class, Migration::class)
+    ->setArgument('$migrationDirectory', __DIR__.'/../src/Migrations');
+$containerBuilder->autowire(MigrationFunctions::class, MigrationFunctions::class)
+    ->setArgument('$requestDirectory', __DIR__.'/../src/Requests')
+    ->setArgument('$functionsDirectory', __DIR__.'/../src/Functions');
+$containerBuilder->autowire(GenerateFileCommand::class, GenerateFileCommand::class)->setPublic(true);
+$containerBuilder->autowire(GenerateFunctionCommand::class, GenerateFunctionCommand::class)->setPublic(true);
+$containerBuilder->autowire(MigrationMigrateCommand::class, MigrationMigrateCommand::class)->setPublic(true);
+$containerBuilder->autowire(MigrationStatusCommand::class, MigrationStatusCommand::class)->setPublic(true);
+$containerBuilder->compile();
+
+$application->add($containerBuilder->get(GenerateFileCommand::class));
+$application->add($containerBuilder->get(GenerateFunctionCommand::class));
+$application->add($containerBuilder->get(MigrationMigrateCommand::class));
+$application->add($containerBuilder->get(MigrationStatusCommand::class));
+
+$application->run();

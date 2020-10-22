@@ -46,5 +46,23 @@ services:
       - ${RABBITMQ_PORT}:5672
       - ${RABBITMQ_MANAGEMENT_PORT}:15672
 
+  migration-dev:
+    image: ${NAME}_migration-dev
+    container_name: ${NAME}_migration-dev
+    build:
+      context: migration
+      args:
+        NAME: ${NAME}_migration
+    environment:
+      DATABASE_URL: ${DATABASE_URL}
+      NAME: ${NAME}_migration
+      APP_ENV: dev
+    volumes:
+      - ../../Migration/:/www/${NAME}_migration:rw
+    links:
+      - "db"
+      - "db:database"
+      - "db:postgresql"
+
 volumes:
   db-data:

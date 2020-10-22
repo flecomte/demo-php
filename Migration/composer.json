@@ -1,0 +1,59 @@
+{
+  "name": "flecomte/yst-migration",
+  "description": "description",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Fabrice Lecomte",
+      "email": "fabrice.lecomte.be@gmail.com"
+    }
+  ],
+  "type": "project",
+  "require": {
+    "php": ">=7.4",
+    "ext-ctype": "*",
+    "ext-iconv": "*",
+    "symfony/console": "^5",
+    "symfony/dependency-injection": "^5",
+    "fle/json-hydrator": "^2@dev",
+    "psr/log": "^1"
+  },
+  "require-dev": {
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": {
+      "*": "dist"
+    },
+    "sort-packages": true
+  },
+  "autoload": {
+    "psr-4": {
+      "Migration\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Migration\\Tests\\": "tests/"
+    }
+  },
+  "replace": {
+    "paragonie/random_compat": "2.*",
+    "symfony/polyfill-ctype": "*",
+    "symfony/polyfill-iconv": "*",
+    "symfony/polyfill-php72": "*",
+    "symfony/polyfill-php71": "*",
+    "symfony/polyfill-php70": "*",
+    "symfony/polyfill-php56": "*"
+  },
+  "conflict": {
+    "symfony/symfony": "*"
+  },
+  "extra": {
+    "symfony": {
+      "allow-contrib": false,
+      "require": "5.*"
+    }
+  }
+}
