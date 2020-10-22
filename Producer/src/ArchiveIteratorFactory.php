@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ArchiveIteratorBuilder
+class ArchiveIteratorFactory
 {
     private string $cacheDir;
 

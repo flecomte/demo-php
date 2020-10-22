@@ -4,10 +4,10 @@ namespace App;
 
 class HistoryService
 {
-    private ArchiveIteratorBuilder $archiveIteratorBuilder;
+    private ArchiveIteratorFactory $archiveIteratorBuilder;
     private Producer $producer;
 
-    public function __construct(ArchiveIteratorBuilder $archiveIteratorBuilder, Producer $producer)
+    public function __construct(ArchiveIteratorFactory $archiveIteratorBuilder, Producer $producer)
     {
         $this->archiveIteratorBuilder = $archiveIteratorBuilder;
         $this->producer = $producer;
