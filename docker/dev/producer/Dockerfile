@@ -14,9 +14,7 @@ COPY config-php/php.ini /usr/local/etc/php/php.ini
 
 # Install PHP extentions
 RUN docker-php-source extract \
-    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS postgresql-dev zlib-dev libzip-dev libpng-dev icu-dev openssl-dev zip \
-    && docker-php-ext-install -j$(nproc) pgsql \
-    && docker-php-ext-install -j$(nproc) pdo_pgsql \
+    && apk add --no-cache --virtual .phpize-deps $PHPIZE_DEPS zlib-dev libzip-dev libpng-dev icu-dev openssl-dev zip \
     && docker-php-ext-install -j$(nproc) iconv \
     && docker-php-ext-install -j$(nproc) intl \
     && docker-php-ext-install -j$(nproc) opcache \

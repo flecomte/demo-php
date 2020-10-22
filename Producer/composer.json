@@ -1,5 +1,5 @@
 {
-  "name": "flecomte/yousign-test-producer",
+  "name": "flecomte/yst-producer",
   "description": "description",
   "minimum-stability": "stable",
   "license": "proprietary",
@@ -30,12 +30,12 @@
   },
   "autoload": {
     "psr-4": {
-      "App\\": "src/"
+      "Producer\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "App\\Tests\\": "tests/"
+      "Producer\\Tests\\": "tests/"
     }
   },
   "replace": {

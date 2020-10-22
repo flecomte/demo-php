@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App;
+namespace Producer;
 
 
 class ArchiveIteratorException extends \Exception

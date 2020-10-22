@@ -3,11 +3,11 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
-use App\AppCommand;
-use App\ArchiveIteratorFactory;
-use App\HistoryService;
-use App\Producer;
 use PhpAmqpLib\Connection\AMQPStreamConnection;
+use Producer\ArchiveIteratorFactory;
+use Producer\HistoryService;
+use Producer\Producer;
+use Producer\ProducerCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
@@ -25,9 +25,9 @@ $containerBuilder->autowire(ArchiveIteratorFactory::class, ArchiveIteratorFactor
 $containerBuilder->autowire(HistoryService::class, HistoryService::class);
 $containerBuilder->autowire(Producer::class, Producer::class)
     ->addArgument($channel);
-$containerBuilder->autowire(AppCommand::class, AppCommand::class)->setPublic(true);
+$containerBuilder->autowire(ProducerCommand::class, ProducerCommand::class)->setPublic(true);
 $containerBuilder->compile();
 
-$application->add($containerBuilder->get(AppCommand::class));
+$application->add($containerBuilder->get(ProducerCommand::class));
 
 $application->run();
