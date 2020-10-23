@@ -6,12 +6,12 @@ YST
 Installation
 ------------
 
+*This command builds the dockers, update composer, run the tests and launch all services (Except the Producer).*
 ```shell
 make install
 ```
 
-then,
-to launch the producer:
+then, to launch the producer like this:
 ```shell
 make fetch date=2015-01-01-12
 ```

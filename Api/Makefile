@@ -21,5 +21,8 @@ run: ## Run
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build api-dev
 
-install: build composer-install run ## Install docker and start api
+test: ## Run tests
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm api-dev vendor/bin/phpunit
+
+install: build composer-install test run ## Install docker and start api
 

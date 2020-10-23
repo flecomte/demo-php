@@ -11,6 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class HistoryController extends AbstractController
 {
     /**
+     * Return all event that match with date and tag
+     *
      * @Route("/history/{date}", name="history", methods={"get"}, requirements={"date"="[0-9]{4}-[0-9]{1,2}-[0-9]{1,2}"})
      */
     public function getHistory(string $date, Request $request, HistoryRepository $repository): JsonResponse

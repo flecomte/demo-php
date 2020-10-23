@@ -29,6 +29,7 @@ install: ## Install the program
 test: ## Test the program
 	@cd docker/dev ; docker-compose -f docker-compose.yml up -d db
 	@cd Migration ; make test
+	@cd Api ; make test
 	@cd Producer ; make test
 
 fetch:

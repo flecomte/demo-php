@@ -25,4 +25,4 @@ test: ## Run tests
 	@cd ./tests ; bash test.sh 1
 	@cd ./tests ; bash test.sh 2
 
-install: build composer-install run ## Install docker and start migration
+install: build composer-install test run ## Install docker and start migration
