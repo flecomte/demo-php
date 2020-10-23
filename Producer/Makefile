@@ -21,4 +21,7 @@ run: ## Run
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build producer-dev
 
-install: build composer-install ## Install
+test: ## Run tests
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm producer-dev vendor/bin/phpunit
+
+install: build composer-install test ## Install
