@@ -15,7 +15,7 @@ class Consumer
 
     public function consume($callback)
     {
-        $this->channel->basic_consume('history', '', false, true, false, false, $callback);
+        $this->channel->basic_consume('commit', '', false, true, false, false, $callback);
 
         while (true) {
             $this->channel->wait();

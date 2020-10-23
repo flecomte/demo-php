@@ -12,10 +12,10 @@ class ProducerCommand extends Command
 {
     private HistoryService $historyService;
 
-    public function __construct(HistoryService $historyService)
+    public function __construct(HistoryService $commitService)
     {
         parent::__construct('app:run');
-        $this->historyService = $historyService;
+        $this->historyService = $commitService;
         $this->addArgument('date', InputArgument::REQUIRED);
     }
 
@@ -28,7 +28,7 @@ class ProducerCommand extends Command
             return Command::FAILURE;
         }
         try {
-            foreach ($this->historyService->pushHistory($date) as $i) {
+            foreach ($this->historyService->pushCommits($date) as $i) {
                 $progress->setProgress($i);
                 $progress->display();
             }

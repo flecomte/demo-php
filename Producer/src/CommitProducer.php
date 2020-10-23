@@ -5,7 +5,7 @@ namespace Producer;
 use PhpAmqpLib\Channel\AMQPChannel;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class Producer
+class CommitProducer
 {
     private AMQPChannel $channel;
 
@@ -17,6 +17,6 @@ class Producer
     public function send(string $message)
     {
         $msg = new AMQPMessage($message);
-        $this->channel->basic_publish($msg, 'history', '');
+        $this->channel->basic_publish($msg, 'commit', '');
     }
 }

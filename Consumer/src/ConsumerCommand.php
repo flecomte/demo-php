@@ -8,18 +8,18 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ConsumerCommand extends Command
 {
-    private HistoryService $historyService;
+    private CommitService $commitService;
 
-    public function __construct(HistoryService $historyService)
+    public function __construct(CommitService $commitService)
     {
         parent::__construct('app:run');
-        $this->historyService = $historyService;
+        $this->commitService = $commitService;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $output->writeln("press CTRL+C to cancel");
-        $this->historyService->saveHistoryFromQueue();
+        $this->commitService->saveCommitsFromQueue();
         $output->writeln('<info>Finish</info>');
         return Command::SUCCESS;
     }

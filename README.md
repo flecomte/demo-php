@@ -17,6 +17,6 @@ then, to launch the producer like this:
 ```shell
 make fetch date=2015-01-01-12
 ```
-Wait a moment, then try to access the URL https://localhost/history/2015-01-01?tag=gitignore
+Wait a moment, then try to access the URL https://localhost/commits/2015-01-01?tag=gitignore
 
-*You can view the progress here: http://localhost:15672/#/queues/%2F/history (guest/guest)*
+*You can view the progress here: http://localhost:15672/#/queues/%2F/commit (guest/guest)*

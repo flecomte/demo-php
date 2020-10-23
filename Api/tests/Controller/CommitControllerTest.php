@@ -4,13 +4,13 @@ namespace Api\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class HistoryControllerTest extends WebTestCase
+class CommitControllerTest extends WebTestCase
 {
-    public function testGetHistory()
+    public function testGetCommit()
     {
         $client = static::createClient();
 
-        $client->request('GET', '/history/2015-01-01?tag=love');
+        $client->request('GET', '/commits/2015-01-01?tag=love');
 
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
     }

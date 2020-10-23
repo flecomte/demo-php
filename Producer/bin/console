@@ -5,8 +5,8 @@ require __DIR__.'/../vendor/autoload.php';
 
 use PhpAmqpLib\Connection\AMQPStreamConnection;
 use Producer\ArchiveIteratorFactory;
+use Producer\CommitProducer;
 use Producer\HistoryService;
-use Producer\Producer;
 use Producer\ProducerCommand;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -15,16 +15,16 @@ $application = new Application();
 
 $amq = new AMQPStreamConnection($_SERVER['RABBITMQ_HOST'], $_SERVER['RABBITMQ_PORT'], 'guest', 'guest');
 $channel = $amq->channel();
-$channel->queue_declare('history', false, true, false, false);
-$channel->exchange_declare('history', 'direct');
-$channel->queue_bind('history', 'history');
+$channel->queue_declare('commit', false, true, false, false);
+$channel->exchange_declare('commit', 'direct');
+$channel->queue_bind('commit', 'commit');
 
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->autowire(ArchiveIteratorFactory::class, ArchiveIteratorFactory::class)
     ->addArgument(__DIR__.'/../var/cache')
     ->addArgument('http://data.gharchive.org');
 $containerBuilder->autowire(HistoryService::class, HistoryService::class);
-$containerBuilder->autowire(Producer::class, Producer::class)
+$containerBuilder->autowire(CommitProducer::class, CommitProducer::class)
     ->addArgument($channel);
 $containerBuilder->autowire(ProducerCommand::class, ProducerCommand::class)->setPublic(true);
 $containerBuilder->compile();

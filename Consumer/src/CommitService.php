@@ -5,18 +5,18 @@ namespace Consumer;
 use FLE\JsonHydrator\Repository\RepositoryFactory;
 use PhpAmqpLib\Message\AMQPMessage;
 
-class HistoryService
+class CommitService
 {
     private Consumer $consumer;
-    private HistoryRepository $repository;
+    private CommitRepository $repository;
 
     public function __construct(Consumer $consumer, RepositoryFactory $repositoryFactory)
     {
         $this->consumer = $consumer;
-        $this->repository = $repositoryFactory->getRepository(HistoryRepository::class);
+        $this->repository = $repositoryFactory->getRepository(CommitRepository::class);
     }
 
-    public function saveHistoryFromQueue()
+    public function saveCommitsFromQueue()
     {
         $this->consumer->consume(fn(AMQPMessage $msg) => $this->repository->insert($msg->body));
     }

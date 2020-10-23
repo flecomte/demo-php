@@ -3,9 +3,9 @@
 
 require __DIR__.'/../vendor/autoload.php';
 
+use Consumer\CommitService;
 use Consumer\Consumer;
 use Consumer\ConsumerCommand;
-use Consumer\HistoryService;
 use FLE\JsonHydrator\Database\Connection;
 use FLE\JsonHydrator\Repository\RepositoryFactory;
 use FLE\JsonHydrator\Serializer\EntityCollection;
@@ -18,7 +18,7 @@ $application = new Application();
 
 $amq = new AMQPStreamConnection($_SERVER['RABBITMQ_HOST'], $_SERVER['RABBITMQ_PORT'], 'guest', 'guest');
 $channel = $amq->channel();
-$channel->queue_declare('history', false, true, false, false);
+$channel->queue_declare('commit', false, true, false, false);
 
 $jmsSerializer = JMS\Serializer\SerializerBuilder::create()->build();
 $serializer = new Serializer($jmsSerializer, null, null);
@@ -42,7 +42,7 @@ $containerBuilder->autowire(RepositoryFactory::class)
     ->setArgument('$serializer', $serializer);
 $containerBuilder->autowire(Consumer::class, Consumer::class)
     ->addArgument($channel);
-$containerBuilder->autowire(HistoryService::class, HistoryService::class);
+$containerBuilder->autowire(CommitService::class, CommitService::class);
 $containerBuilder->autowire(ConsumerCommand::class, ConsumerCommand::class)->setPublic(true);
 $containerBuilder->compile();
 

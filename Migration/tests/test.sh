@@ -1,5 +1,5 @@
 #!/bin/bash
-options=("RESET DB" "All" "history" "Quit")
+options=("RESET DB" "All" "commit" "Quit")
 if [ -z "$1" ]; then
   PS3='Please enter your choice: '
   select ch in "${options[@]}"
