@@ -12,7 +12,7 @@ BEGIN
         jsonb_path_query_array(data, '$.payload.commits[*].message') as messages
       FROM history
       WHERE data->>'type' = 'PushEvent' and
-            history_tags(data) @> ARRAY[keyword] and
+            (keyword is null or history_tags(data) @> ARRAY[keyword]) and
             created_at BETWEEN date_trunc('day', _created_at) and (date_trunc('day', _created_at) + INTERVAL '1 day')
     ) t;
 END

@@ -18,8 +18,8 @@ class HistoryController extends AbstractController
     public function getHistory(string $date, Request $request, HistoryRepository $repository): JsonResponse
     {
         $result = $repository->findAll(
-            $request->query->get('tag'),
             $date,
+            $request->query->get('tag'),
         );
 
         return $this->json($result);
