@@ -12,7 +12,7 @@ Interesting points
   - [Use UML to improve the understanding](./doc/Schema/schema.md)
 - SQL without ORM
   - [Migrations](./Migration/src/Migrations/2020-10)
-  - [Queries as functions](./Migration/src/Functions)
-  - [Use JSON to save data](./Migration/src/Functions/history/insert.sql)
-  - [Usage](./Api/src/Repository/CommitRepository.php)
+  - [Queries as functions](./Migration/src/Functions/commit)
+  - [Use JSON to save data](./Migration/src/Functions/commit/insert.sql)
+  - [Usage query](./Api/src/Repository/CommitRepository.php)
   - [Table partitioning for large data](./Migration/src/Migrations/2020-10/2020-10-22_17-29-47.up.sql)
