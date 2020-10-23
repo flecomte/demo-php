@@ -26,5 +26,10 @@ install: ## Install the program
 	@cd Api ; make install
 	@cd Consumer ; make install
 
+test: ## Test the program
+	@cd docker/dev ; docker-compose -f docker-compose.yml up -d db
+	@cd Migration ; make test
+	@cd Producer ; make test
+
 fetch:
 	@cd producer ; make run
