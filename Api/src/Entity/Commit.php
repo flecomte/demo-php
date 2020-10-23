@@ -3,14 +3,9 @@
 namespace Api\Entity;
 
 use FLE\JsonHydrator\Entity\UuidEntityInterface;
-use JMS\Serializer\Annotation as JMS;
 
-/**
- * @JMS\ExclusionPolicy("none")
- */
 class Commit implements UuidEntityInterface
 {
-    /** @JMS\Expose() */
     private string $sha;
     private ?string $message;
     private ?\DateTimeImmutable $createdAt;
