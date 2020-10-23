@@ -6,6 +6,8 @@ YST
 Installation
 ------------
 
+[Installation prerequisites](./doc/installation/Installation.md)
+
 *This command builds the dockers, update composer, run the tests and launch all services (Except the Producer).*
 ```shell
 make install
