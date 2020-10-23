@@ -1,2 +1,2 @@
 drop table if exists commits;
-drop function text_to_array_of_words;
+drop function if exists text_to_array_of_words;
