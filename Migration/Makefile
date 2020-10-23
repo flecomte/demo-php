@@ -21,5 +21,8 @@ run: ## Run
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build migration-dev
 
-install: build composer-install run ## Install docker and start migration
+test: ## Run tests
+	@cd ./tests ; bash test.sh 1
+	@cd ./tests ; bash test.sh 2
 
+install: build composer-install run ## Install docker and start migration

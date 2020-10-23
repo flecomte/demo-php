@@ -1,1 +1,1 @@
-drop table history;
+drop table if exists history;
