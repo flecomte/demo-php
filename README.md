@@ -1,7 +1,9 @@
 YST
 ===
 
-[Schemas](./doc/Schema/schema.md)
+This demo shows several interesting points: [See the list](./demo.md)
+
+You can view the [diagrams](./doc/Schema/schema.md) for understand the program.
 
 Installation
 ------------
