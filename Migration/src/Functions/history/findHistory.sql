@@ -3,13 +3,17 @@ CREATE OR REPLACE FUNCTION find_history (_created_at timestamptz, keyword text, 
   PARALLEL SAFE
 AS $$
 BEGIN
-  SELECT to_json(t) INTO result
+  SELECT json_agg(t) INTO result
     FROM
     (
       SELECT
-        *
+        id,
+        created_at,
+        jsonb_path_query_array(data, '$.payload.commits[*].message') as messages
       FROM history
-      WHERE created_at BETWEEN date_trunc('day', _created_at) and (date_trunc('day', _created_at) + INTERVAL '1 day')
+      WHERE data->>'type' = 'PushEvent' and
+            history_tags(data) @> ARRAY[keyword] and
+            created_at BETWEEN date_trunc('day', _created_at) and (date_trunc('day', _created_at) + INTERVAL '1 day')
     ) t;
-END;
+END
 $$;

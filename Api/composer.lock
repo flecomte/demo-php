@@ -280,12 +280,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/flecomte/json-hydrator.git",
-                "reference": "1cb10dc93ed3373052cb74394d46e09d90c49284"
+                "reference": "aa021763765e2050ddff8ce0b696459e0cf06231"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/flecomte/json-hydrator/zipball/1cb10dc93ed3373052cb74394d46e09d90c49284",
-                "reference": "1cb10dc93ed3373052cb74394d46e09d90c49284",
+                "url": "https://api.github.com/repos/flecomte/json-hydrator/zipball/aa021763765e2050ddff8ce0b696459e0cf06231",
+                "reference": "aa021763765e2050ddff8ce0b696459e0cf06231",
                 "shasum": ""
             },
             "require": {
@@ -339,7 +339,7 @@
                 "postgresql",
                 "serializer"
             ],
-            "time": "2020-10-22T17:14:15+00:00"
+            "time": "2020-10-23T01:50:54+00:00"
         },
         {
             "name": "fle/json-hydrator-bundle",
