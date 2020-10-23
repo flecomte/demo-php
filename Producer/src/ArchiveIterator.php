@@ -15,10 +15,10 @@ class ArchiveIterator implements \Iterator
     /**
      * @throws ArchiveIteratorException
      */
-    public function __construct(string $date, string $cacheDir)
+    public function __construct(string $date, string $cacheDir, string $baseUrl)
     {
         $fileName = "$date.json.gz";
-        $url = "http://data.gharchive.org/$fileName";
+        $url = "$baseUrl/$fileName";
         $this->tmpFilename = "{$cacheDir}/zip/{$fileName}";
 
         if (!is_dir("{$cacheDir}/zip/")) {

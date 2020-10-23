@@ -21,7 +21,8 @@ $channel->queue_bind('history', 'history');
 
 $containerBuilder = new ContainerBuilder();
 $containerBuilder->autowire(ArchiveIteratorFactory::class, ArchiveIteratorFactory::class)
-    ->addArgument(__DIR__.'/../var/cache');
+    ->addArgument(__DIR__.'/../var/cache')
+    ->addArgument('http://data.gharchive.org');
 $containerBuilder->autowire(HistoryService::class, HistoryService::class);
 $containerBuilder->autowire(Producer::class, Producer::class)
     ->addArgument($channel);
