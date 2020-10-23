@@ -21,3 +21,4 @@ run: ## Run
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build producer-dev
 
+install: build composer-install ## Install

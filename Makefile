@@ -8,5 +8,23 @@ help: ## This help.
 
 .DEFAULT_GOAL := help
 
+build: ## Build dockers
+	@cd docker/dev ; docker-compose -f docker-compose.yml build rabbitmq db
+	@cd Migration ; make build
+	@cd Api ; make build
+	@cd Consumer ; make build
+
 run: ## Run dependencies
 	@cd docker/dev ; docker-compose -f docker-compose.yml up -d rabbitmq db
+	@cd Migration ; make run
+	@cd Api ; make run
+	@cd Consumer ; make run
+
+install: ## Install the program
+	@cd docker/dev ; docker-compose -f docker-compose.yml up -d rabbitmq db
+	@cd Migration ; make install
+	@cd Api ; make install
+	@cd Consumer ; make install
+
+fetch:
+	@cd producer ; make run

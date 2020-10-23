@@ -16,8 +16,9 @@ composer-install: ## Composer install
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm consumer-dev composer install
 
 run: ## Run
-	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm consumer-dev bin/console app:run
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run -d --rm consumer-dev bin/console app:run
 
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build consumer-dev
 
+install: build composer-install run ## Install and run consumer

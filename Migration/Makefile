@@ -16,7 +16,7 @@ composer-install: ## Composer install
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm migration-dev composer install
 
 run: ## Run
-	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm migration-dev bin/console m:m
+	@cd ../docker/dev ; docker-compose -f docker-compose.yml run --rm migration-dev bin/console m:m --force
 
 build: ## Build docker image
 	@cd ../docker/dev ; docker-compose -f docker-compose.yml build migration-dev

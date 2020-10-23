@@ -5,11 +5,11 @@ Installation
 ------------
 
 ```shell
-make run
+make install
 ```
 
 then,
 to launch the producer:
 ```shell
-cd producer ; make run date=2015-01-01-12
+make fetch date=2015-01-01-12
 ```
